@@ -30,7 +30,5 @@
 {PROGRAM}
 relevant_target(X,Y,Z) :- a, relevant_target(Z,X,Y), b.
 
-{FULL EVALUATION}
-
 {QUERY}
 relevant_target(α1,α2,α3)
