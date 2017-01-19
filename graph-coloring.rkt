@@ -20,37 +20,31 @@
 ; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 ; SOFTWARE.
 
-#lang reader "cclp-reader.rkt"
+#lang cclp
 {PROGRAM}
-safe_coloring(Ns,Cs) :- coloring(Cs),safe(Ns,Cs).
+safe_coloring(Ns,Cs) :-
+  coloring(Cs),
+  safe(Ns,Cs).
 
 coloring([]).
-coloring([C|Cs]) :- color(C),coloring(Cs).
+coloring([C|Cs]) :-
+  color(C),
+  coloring(Cs).
 
 safe([],[]).
 safe([N],[C]).
 safe([N_1,N_2|Ns],[C_1,C_2|Cs]) :-
-    allsafe(N_1,C_1,[N_2|Ns],[C_2|Cs]),
-    safe([N_2|Ns],[C_2|Cs]).
+  allsafe(N_1,C_1,[N_2|Ns],[C_2|Cs]),
+  safe([N_2|Ns],[C_2|Cs]).
 
 allsafe(N,C,[],[]).
 allsafe(N_1,C_1,[N_2|Ns],[C_2|Cs]) :-
-    test(N_1,C_1,N_2,C_2),
-    allsafe(N_2,C_2,Ns,Cs).
+  test(N_1,C_1,N_2,C_2),
+  allsafe(N_2,C_2,Ns,Cs).
 
 {FULL EVALUATION}
 color(α1) -> α1/γ1.
 test(γ1,γ2,γ3,γ4).
-
-{PREPRIOR}
-coloring(α1),safe([γ1|γ2],[γ2|α1])
-coloring(α1),allsafe(γ1,γ2,γ3,α1)
-safe(γ1,[γ2,γ3|α1]),coloring(α1)
-allsafe(γ1,γ2,γ3,[γ4|α1]),coloring(α1)
-allsafe(γ1,γ2,γ3,[γ4|α1]),safe([γ1|γ2],[γ3,γ4|α1])
-allsafe(γ1,γ2,[γ3|γ4],[γ5|α1]),safe([γ1,γ2|γ3],[γ4,γ5|α1])
-allsafe(γ1,γ2,γ3,[]),safe([γ1|γ2],[γ3])
-allsafe(γ1,γ2,[],[]),safe([γ1],[γ2])
 
 {CONCRETE CONSTANTS}
 nil

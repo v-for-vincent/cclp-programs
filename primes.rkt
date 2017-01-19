@@ -20,7 +20,7 @@
 ; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 ; SOFTWARE.
 
-#lang reader "cclp-reader.rkt"
+#lang cclp
 {PROGRAM}
 primes(N,Primes) :- integers(2,I),sift(I,Primes),length(Primes,N).
 
@@ -42,17 +42,6 @@ plus(γ1,γ2,α1) -> α1/γ3.
 minus(γ1,γ2,α1) -> α1/γ3.
 divides(γ1,γ2).
 does_not_divide(γ1,γ2).
-
-{PREPRIOR}
-integers(γ1,α1),filter(γ1,α1,α2)
-integers(γ1,α1),sift(α1,α2)
-integers(γ1,α1),length(α1,γ1)
-sift([γ1|α1],α2),integers(γ1,α1)
-sift(γ1,α1),length(α1,γ1)
-filter(γ1,γ2,α1),integers(γ1,α1)
-filter(γ1,[γ2|α1],α2),integers(γ1,α1)
-length([γ1|α1],γ2),integers(γ1,γ2)
-length(γ1,γ2),integers(γ1,[γ2|γ3])
 
 % if this is enabled, full evaluation of integers and length is not needed
 {CONCRETE CONSTANTS}

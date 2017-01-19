@@ -20,7 +20,7 @@
 ; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 ; SOFTWARE.
 
-#lang reader "cclp-reader.rkt"
+#lang cclp
 % this shouldn't end up with a closed analysis
 % on some branches, we will get a seemingly random sequence of appendA/appendB atoms (interspersed with filters)
 {PROGRAM}
@@ -34,23 +34,6 @@ appendA([],L,L).
 appendA([H|T],L,[H|TR]) :- appendA(T,L,TR).
 appendB([],L,L).
 appendB([H|T],L,[H|TR]) :- appendB(T,L,TR).
-
-{PREPRIOR}
-collect(γ1,α1),eq(α1,α2)
-collect(γ1,α1),appendA(α1,α2,α3)
-collect(γ1,α1),appendB(α1,α2,α3)
-appendA(γ1,α1,α2),collect(γ1,α1)
-appendA(γ1,α1,α2),appendA([γ1|α1],α2,α3)
-appendA([γ1|α1],α2,α3),collect(γ1,α1)
-eq([γ1|α1],α2),collect(γ1,α1)
-eq(γ1,α1),collect(γ1,[γ2|α1])
-appendA([],α1,α2),eq([γ1|α1],α2)
-eq(α1,[]),collect(γ1,α1)
-appendA(α1,α2,[γ1|α3]),collect(γ1,α1)
-collect(γ1,[]),collect(γ1,[γ2|α1])
-collect(γ1,[]),collect(γ1,[γ2])
-appendA(α1,α2,[]),collect(γ1,[γ2|α1])
-appendA(α1,α2,[]),collect(γ1,[])
 
 {CONCRETE CONSTANTS}
 nil

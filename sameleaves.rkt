@@ -20,7 +20,7 @@
 ; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 ; SOFTWARE.
 
-#lang reader "cclp-reader.rkt"
+#lang cclp
 {PROGRAM}
 sameleaves(T1,T2) :- collect(T1,T1L),collect(T2,T2L),eq(T1L,T2L).
 eq([],[]).
@@ -29,22 +29,6 @@ collect(node(X),[X]).
 collect(tree(L,R),C) :- collect(L,CL),collect(R,CR),append(CL,CR,C).
 append([],L,L).
 append([H|T],L,[H|TR]) :- append(T,L,TR).
-
-{PREPRIOR}
-collect(γ1,α1),eq(α1,α2)
-collect(γ1,α1),append(α1,α2,α3)
-append(γ1,α1,α2),collect(γ1,α1)
-append(γ1,α1,α2),append([γ1|α1],α2,α3)
-append([γ1|α1],α2,α3),collect(γ1,α1)
-eq([γ1|α1],α2),collect(γ1,α1)
-eq(γ1,α1),collect(γ1,[γ2|α1])
-append([],α1,α2),eq([γ1|α1],α2)
-eq(α1,[]),collect(γ1,α1)
-append(α1,α2,[γ1|α3]),collect(γ1,α1)
-collect(γ1,[]),collect(γ1,[γ2|α1])
-collect(γ1,[]),collect(γ1,[γ2])
-append(α1,α2,[]),collect(γ1,[γ2|α1])
-append(α1,α2,[]),collect(γ1,[])
 
 {CONCRETE CONSTANTS}
 nil

@@ -20,7 +20,7 @@
 ; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 ; SOFTWARE.
 
-#lang reader "cclp-reader.rkt"
+#lang cclp
 % an atypical program which requires more than one target atom to be "active" at the same time
 % this can probably be made to work, but not with generational trees that simply assume a target
 % and assign numbers to descendants
@@ -34,17 +34,6 @@ b :- d, e.
 a :- f, g.
 e :- b.
 f :- a.
-
-{PREPRIOR}
-b,a
-a,d
-a,e
-e,f
-e,g
-e,d
-f,d
-f,b
-f,g
 
 {CONCRETE CONSTANTS}
 nil

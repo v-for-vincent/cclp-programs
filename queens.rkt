@@ -20,7 +20,7 @@
 ; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 ; SOFTWARE.
 
-#lang reader "cclp-reader.rkt"
+#lang cclp
 {PROGRAM}
 queens(N,Q) :- genlist(N,L), perm(L,Q), safe(Q).
 
@@ -45,14 +45,6 @@ gt(γ1,γ2).
 genlist(γ1,α1) -> α1/γ2.
 test(γ1,γ2,γ3).
 del(α1,γ1,α2) -> α1/γ2,α2/γ3.
-
-{PREPRIOR}
-perm(γ1,α1),safe([γ1|α1])
-perm(γ1,α1),ndiag(γ1,γ2,α1)
-safe([γ1,γ2|α1]),perm(γ1,α1)
-ndiag(γ1,γ2,[γ3|α1]),perm(γ1,α1)
-ndiag(γ1,γ2,[γ3|α1]),safe([γ1,γ2|α1])
-ndiag(γ1,γ2,[]),safe([γ1])
 
 {CONCRETE CONSTANTS}
 nil

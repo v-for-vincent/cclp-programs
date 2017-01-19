@@ -32,9 +32,5 @@ relevant_target(X,Y,Z) :- a, relevant_target(Z,X,Y), b.
 
 {FULL EVALUATION}
 
-{PREPRIOR}
-relevant_target(α1,α2,α3),a.
-relevant_target(α1,α2,α3),b.
-
 {QUERY}
 relevant_target(α1,α2,α3)

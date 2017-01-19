@@ -20,7 +20,7 @@
 ; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 ; SOFTWARE.
 
-#lang reader "cclp-reader.rkt"
+#lang cclp
 {PROGRAM}
 sort(X,Y) :- perm(X,Y),ord(Y).
 
@@ -34,11 +34,6 @@ ord([X,Y|Z]) :- lte(X,Y),ord([Y|Z]).
 {FULL EVALUATION}
 lte(γ1,γ2).
 del(α1,[γ1|γ2],α2) -> α1/γ3,α2/γ4.
-
-{PREPRIOR}
-perm(γ1,α1),ord(α1)
-perm(γ1,α1),ord([γ1|α1])
-ord([γ1,γ2|α1]),perm(γ1,α1)
 
 {QUERY}
 sort(γ1,α1)
