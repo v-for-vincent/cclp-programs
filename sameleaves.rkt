@@ -33,6 +33,13 @@ collect(tree(L,R),[H1,H2|T]) :- collect(L,CL),collect(R,CR),append(CL,CR,[H1,H2|
 append([],L,L).
 append([H|T],L,[H|TR]) :- append(T,L,TR).
 
+{FULL EVALUATION}
+collect(γ1,[]) -> fail.
+append([],α1,α2) -> α1/α2.
+
+eq([],[α1|α2]) -> fail.
+eq([α1|α2],[]) -> fail.
+
 {CONCRETE CONSTANTS}
 nil
 
