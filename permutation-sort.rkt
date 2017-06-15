@@ -35,5 +35,8 @@ ord([X,Y|Z]) :- lte(X,Y),ord([Y|Z]).
 lte(γ1,γ2).
 del(α1,[γ1|γ2],α2) -> α1/γ3,α2/γ4.
 
+{CONCRETE CONSTANTS}
+nil
+
 {QUERY}
 sort(γ1,α1)

@@ -23,10 +23,13 @@
 #lang cclp
 {PROGRAM}
 sameleaves(T1,T2) :- collect(T1,T1L),collect(T2,T2L),eq(T1L,T2L).
+
 eq([],[]).
 eq([H|T1],[H|T2]) :- eq(T1,T2).
+
 collect(node(X),[X]).
-collect(tree(L,R),C) :- collect(L,CL),collect(R,CR),append(CL,CR,C).
+collect(tree(L,R),[H1,H2|T]) :- collect(L,CL),collect(R,CR),append(CL,CR,[H1,H2|T]).
+
 append([],L,L).
 append([H|T],L,[H|TR]) :- append(T,L,TR).
 
