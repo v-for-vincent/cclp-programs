@@ -20,28 +20,46 @@
 ; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 ; SOFTWARE.
 
+; this is a CCLP implementation of the logic programming pearl by Howe and King
+; it is of particular interest because it uses the case split mechanism in CCLP
+
 #lang cclp
 {PROGRAM}
-sameleaves(T1,T2) :- collect(T1,T1L),collect(T2,T2L),eq(T1L,T2L).
+sat(Clauses, Vars) :-
+  problem_setup(Clauses),
+  elim_var(Vars).
 
-eq([],[]).
-eq([H|T1],[H|T2]) :- eq(T1,T2).
+elim_var([]).
+elim_var([Var|Vars]) :-
+  elim_var(Vars),
+  assign(Var).
 
-collect(node(X),[X]).
-collect(tree(L,R),C) :- collect(L,CL),collect(R,CR),append(CL,CR,C).
+assign(true).
+assign(false).
 
-append([],L,L).
-append([H|T],L,[H|TR]) :- append(T,L,TR).
+problem_setup([]).
+problem_setup([Clause|Clauses]) :-
+  clause_setup(Clause),
+  problem_setup(Clauses).
+
+clause_setup([pair(Pol,Var)|Pairs]) :- set_watch(Pairs,Var,Pol).
+
+% TODO: verify that unify is right construct here
+set_watch([], Var, Pol) :- unify(Var,Pol).
+set_watch([pair(Pol2,Var2)|Pairs],Var1,Pol1):-
+  watch(Var1, Pol1, Var2, Pol2, Pairs).
+
+% TODO
+% don't need block condition, that's what CCLP is for...
+watch(Var1, Pol1, Var2, Pol2, Pairs) :-
+nonvar(Var1) ->
+update_watch(Var1, Pol1, Var2, Pol2, Pairs);
+update_watch(Var2, Pol2, Var1, Pol1, Pairs).
 
 {FULL EVALUATION}
-append([],α1,α2) -> α1/α2.
-append(α1,α2,[]) -> fail.
-collect(γ1,[]) -> fail.
-eq([],[α1|α2]) -> fail.
-eq([α1|α2],[]) -> fail.
+
 
 {CONCRETE CONSTANTS}
 nil
 
 {QUERY}
-sameleaves(γ1,γ2)

@@ -40,7 +40,7 @@ safe([N_1,N_2|Ns],[C_1,C_2|Cs]) :-
 allsafe(N,C,[],[]).
 allsafe(N_1,C_1,[N_2|Ns],[C_2|Cs]) :-
   test(N_1,C_1,N_2,C_2),
-  allsafe(N_2,C_2,Ns,Cs).
+  allsafe(N_1,C_1,Ns,Cs).
 
 {FULL EVALUATION}
 color(α1) -> α1/γ1.
